@@ -1,112 +1,166 @@
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, UserRound } from "lucide-react";
 import { useState } from "react"
 
 export default function Form() {
-  const [name, seName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] =useState(false);
+  const [message, setMessage] = useState("");
 
   const handleForm = (e) => {
-    e.preventDefault();  
+    e.preventDefault();
+    
+    setMessage("Form submitted successfully!");
+
+    setName("");
+    setEmail("");
+    setPassword("");
   }
 
+  const checks = [
+    password.length >= 8,
+    /[A-Z]/.test(password),
+    /[a-z]/.test(password),
+    /[0-9]/.test(password),
+    /[^A-Za-z0-9]/.test(password)
+  ];
+
+  const isStrong = checks.every(Boolean);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-600 px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#2d2dff] via-[#5555ff] to-[#8b5cf6] px-4 py-10">
 
         {/* form */}
       <form 
         onSubmit={handleForm} 
-        className="py-5 sm:py-6 mt-10">
-        <div className="w-full max-w-md border border-[#2d2dff]/20 bg-white rounded-3xl px-6 py-9 sm:px-9 sm:py-10 shadow-[0_12px_35px_rgba(45,45,255,0.10]"       
+        className="w-full max-w-md">
+
+        <div className="border border-white/50 bg-white rounded-3xl px-6 py-9 sm:px-9 sm:py-10 shadow-2xl"       
         >
 
             {/* heading */}
-          <div className="text-center mb-9">
+          <div className="text-center mb-8">
+
+            <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-2xl bg-[#2d2dff]/10" >
+              <UserRound size={30} className="text-[#2d2dff]"/>
+            </div>
+
             <h1 className="text-3xl sm:text-4xl font-bold text-[#2d2dff]">
-            Sign Up
+            Create Account
             </h1>
+
+            <p className="text-sm text-gray-500 mt-2">
+              Sign up to get started
+            </p>
+
           </div>
+          
             {/* Input fields */}
           <div className="flex flex-col gap-6"></div>
 
           {/* name */}
-          <fieldset className="border border-[#2d2dff]/40 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/10">
+          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
+
             <legend className="px-2 text-sm text-[#2d2dff] font-medium">
               Name
             </legend>
 
             <input 
-            type="text"
-            placeholder="Enter Name"
-            value={name}
-            onChange={(e) => seName(e.target.value)}
-            className="w-full text-sm font-medium outline-none bg-transparent py-1"
-            required
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter"}
+              className="w-full text-sm font-medium outline-none bg-transparent py-1"
+              required
             />
           </fieldset>
           
            {/* email */}
-          <fieldset className="border border-[#2d2dff]/40 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/10">
+          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
+
             <legend className="px-2 text-sm text-[#2d2dff] font-medium">
               Email
             </legend>
 
             <input 
-            type="email"           
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full text-sm font-medium outline-none bg-transparent py-1"
-            required 
+              type="email"           
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter"}
+              className="w-full text-sm font-medium outline-none bg-transparent py-1"
+              required 
             />
           </fieldset>
          
 
-               {/* password */}
-            <fieldset className="relative border border-[#2d2dff]/40 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/10 transition">
-              <legend className="px-2 text-sm text-[#2d2dff] font-medium">
-                Password
-              </legend>
+            {/* password */}
+          <fieldset className="relative border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
 
-              <div className="flex items-center">
-                <input 
+            <legend className="px-2 text-sm text-[#2d2dff] font-medium">
+                Password
+            </legend>
+
+            <div className="flex items-center">
+              <input 
                 type={showPassword ? "text" : "password"}          
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter"}
                 className="w-full text-sm font-medium outline-none bg-transparent py-1"
                 required
-                />
+              />
 
-                  {/* show password button & EyeIcons */}
-                <button 
+                {/* show password button & EyeIcons */}
+              <button 
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="transition-colors cursor-pointer"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                 {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
-                </button>
+              </button>
               </div>
             </fieldset>
 
-            <p className={`font-medium ${password.length < 6
-                ? "text-amber-700" : "text-green-600"
+               {/* password strength */}
+          {password.length > 0 && (
+            <div>
+              <p className={`text-sm font-medium mb-4 ${isStrong
+                ? "text-green-600" : "text-red-500"
               }`}>
-                {password.length === 0 ? "" : password.length < 6
-                ? "Weak" : "Strong" }
+                  {isStrong ? "Strong Password" : "Weak password" }
               </p>
-                                 
+
+              <p className="text-xs text-gray-500 mt-2">
+                Use 8+ characters, uppercase, lowercase,
+                number and special character.
+              </p>
+            </div>
+          )}  
+
             {/*  submit button */}
             <button 
               type="submit"
-              className="w-full bg-[#2d2dff] text-white font-semibold rounded-xl py-3 mt-2 hover:bg-[#2525db] hover:shadow-md transition-all duration-300 cursor-pointer">
-              Sign Up
+              className="w-full bg-[#2d2dff] text-white font-semibold rounded-xl py-3 mt-5 hover:bg-[#2525db] hover:shadow-lg hover:shadow-[#2d2dff]/30 transition-all duration-300 cursor-pointer">
+              Create Account
             </button>
+                  
+                {/* success message */}
+              {message && (
+                <p className={`text-center text-sm font-medium mt-4 ${
+                message.includes("successfully") ? "text-green-600" : "text-red-500"
+                }`}>
+                {message}
+                </p>
+              )}             
 
         </div>
       </form>
+   
     </div>
   )
 }
