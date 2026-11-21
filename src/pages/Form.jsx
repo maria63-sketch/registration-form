@@ -60,7 +60,7 @@ export default function Form() {
           <div className="flex flex-col gap-6"></div>
 
           {/* name */}
-          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
+          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 hover:border-gray-500 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all duration-200">
 
             <legend className="px-2 text-sm text-[#2d2dff] font-medium">
               Name
@@ -78,7 +78,7 @@ export default function Form() {
           </fieldset>
           
            {/* email */}
-          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
+          <fieldset className="border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 hover:border-gray-500 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all duration-200">
 
             <legend className="px-2 text-sm text-[#2d2dff] font-medium">
               Email
@@ -97,7 +97,7 @@ export default function Form() {
          
 
             {/* password */}
-          <fieldset className="relative border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all">
+          <fieldset className="relative border border-gray-300 rounded-xl mb-5 px-4 pb-2 pt-1 hover:border-gray-500 focus-within:border-[#2d2dff] focus-within:ring-2 focus-within:ring-[#2d2dff]/15 transition-all duration-200">
 
             <legend className="px-2 text-sm text-[#2d2dff] font-medium">
                 Password
@@ -118,10 +118,10 @@ export default function Form() {
               <button 
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="transition-colors cursor-pointer"
+                className="text-gray-800 transition-colors cursor-pointer"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                {showPassword ? <Eye size={19} /> : <EyeOff size={19} />}
               </button>
               </div>
             </fieldset>
